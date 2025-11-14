@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choklit Markus | Luxury Chocolate</title>
+<style>
+* { box-sizing:border-box; scroll-behavior:smooth; }
+body { margin:0; font-family:'Poppins', sans-serif; background:#0b0b0b; color:#f0c674; transition:0.4s ease; }
+header { display:flex; justify-content:space-between; align-items:center; padding:20px 10%; background:rgba(0,0,0,0.9); position:sticky; top:0; z-index:1000; backdrop-filter:blur(8px); }
+.logo { font-size:1.5em; font-weight:bold; color:#f0c674; }
+nav ul { list-style:none; display:flex; gap:20px; margin:0; padding:0; }
+nav a { color:#f0c674; text-decoration:none; transition:0.3s; font-weight:500; }
+nav a:hover, nav a.active { color:#fff; }
+.lang-btn { background:#f0c674; border:none; border-radius:5px; padding:6px 10px; cursor:pointer; color:#000; font-weight:bold; transition:0.3s; }
+.lang-btn:hover { background:#fff; }
+
+.cart-icon { position: relative; font-size: 1.4em; cursor: pointer; color: #f0c674; }
+.cart-icon span { position:absolute; top:-8px; right:-10px; background:#f0c674; color:#000; border-radius:50%; font-size:0.7em; padding:2px 6px; font-weight:bold; }
+.cart-icon.pulse { animation: pulseAnim 0.6s ease; }
+
+@keyframes pulseAnim {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); box-shadow:0 0 20px #f0c674; }
+  100% { transform: scale(1); }
+}
+
+.hero { text-align:center; padding:100px 20px; background:url('https://images.unsplash.com/photo-1606313564200-9d5c2a8f9b67?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; color:#fff; }
+.hero h1 { font-size:3em; }
+.btn { display:inline-block; margin-top:20px; padding:10px 25px; background:#f0c674; color:#000; border-radius:5px; text-decoration:none; transition:0.3s; cursor:pointer; }
+.btn:hover { background:#fff; color:#000; }
+
+section.page { padding:60px 10%; text-align:center; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:30px; }
+.card { background:#111; border-radius:10px; padding:10px; transition:0.3s; }
+.card:hover { transform:scale(1.08); box-shadow:0 10px 20px rgba(240,198,116,0.5); }
+.card img { width:100%; border-radius:10px; }
+
+footer { background:#000; text-align:center; padding:20px; margin-top:50px; font-size:0.9em; }
+
+[dir="rtl"] { text-align:right; font-family:'Cairo', sans-serif; }
+
+#customerForm { margin:30px auto; max-width:400px; text-align:left; background:#111; padding:20px; border-radius:10px; }
+#customerForm label { display:block; margin-top:10px; font-weight:bold; }
+#customerForm input { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:none; }
+#customerForm button { margin-top:15px; width:100%; padding:10px; background:#f0c674; border:none; border-radius:5px; cursor:pointer; font-weight:bold; }
+#customerForm button:hover { background:#fff; color:#000; }
+
+#cartItems li { margin:5px 0; padding:5px; border-bottom:1px solid #333; display:flex; justify-content:space-between; align-items:center; }
+#cartItems button { background:transparent; border:none; cursor:pointer; color:#f0c674; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Choklit Markus</div>
+  <nav>
+    <ul>
+      <li><a href="#home" class="active" data-en="Home" data-ar="الرئيسية">Home</a></li>
+      <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+      <li><a href="#shop" data-en="Shop" data-ar="المتجر">Shop</a></li>
+    </ul>
+  </nav>
+  <div class="cart-icon" id="cartIcon">🛒<span id="cartBadge">0</span></div>
+  <button class="lang-btn" id="langBtn">AR</button>
+</header>
+
+<section id="home" class="hero">
+  <h1 data-en="Luxury You Can Taste" data-ar="ترف يمكنك تذوقه">Luxury You Can Taste</h1>
+  <p data-en="Premium chocolate crafted with excellence." data-ar="شوكولاتة فاخرة مصنوعة بإتقان.">Premium chocolate crafted with excellence.</p>
+  <a href="#shop" class="btn" data-en="Explore Products" data-ar="استكشف المنتجات">Explore Products</a>
+</section>
+
+<section id="shop" class="page">
+  <h1 data-en="Shop" data-ar="المتجر">Shop</h1>
+
+  <label data-en="Filter by Type:" data-ar="فلتر حسب النوع:">Filter by Type:</label>
+  <select id="filterSelect">
+    <option value="All" data-en="All" data-ar="الكل">All</option>
+    <option value="Dark" data-en="Dark" data-ar="داكن">Dark</option>
+    <option value="Milk" data-en="Milk" data-ar="حليب">Milk</option>
+    <option value="Caramel" data-en="Caramel" data-ar="كراميل">Caramel</option>
+  </select>
+
+  <div class="grid" id="shopGrid">
+    <div class="card" data-name-en="Dark Chocolate" data-name-ar="شوكولاتة داكنة" data-price="50" data-type="Dark">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.QmxlxCdXworh562OfvMuewHaHa?pid=Api&P=0&h=180">
+      <h3>Dark Chocolate</h3>
+      <p>Price: 50 MAD</p>
+      <button class="btn add-cart">Add to Cart</button>
+    </div>
+    <div class="card" data-name-en="Milk Chocolate" data-name-ar="شوكولاتة بالحليب" data-price="45" data-type="Milk">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.lEO3VHo44dhaZU6jKQHwtAHaEK?pid=Api&P=0&h=180">
+      <h3>Milk Chocolate</h3>
+      <p>Price: 45 MAD</p>
+      <button class="btn add-cart">Add to Cart</button>
+    </div>
+    <div class="card" data-name-en="Caramel Bliss" data-name-ar="كراميل بليس" data-price="55" data-type="Caramel">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.HG4WOVklUHSxnpGzESRsRQHaHa?pid=Api&P=0&h=180">
+      <h3>Caramel Bliss</h3>
+      <p>Price: 55 MAD</p>
+      <button class="btn add-cart">Add to Cart</button>
+    </div>
+  </div>
+
+  <div id="cart" style="margin-top:40px; text-align:center;">
+    <h2 data-en="Your Cart" data-ar="سلتك">Your Cart (<span id="cartCount">0</span>)</h2>
+    <ul id="cartItems"></ul>
+    <p id="total"><span data-en="Total" data-ar="المجموع">Total</span>: 0 MAD</p>
+  </div>
+
+  <form id="customerForm">
+    <h3 data-en="Customer Information" data-ar="معلومات الزبون">Customer Information</h3>
+    <label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+    <input type="text" id="customerName" required>
+
+    <label data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+    <input type="email" id="customerEmail" required>
+
+    <label data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+    <input type="tel" id="customerPhone" pattern="[0-9]{10,15}" required>
+
+    <label data-en="City" data-ar="المدينة">City</label>
+    <input type="text" id="customerCity" required>
+
+    <label data-en="Address" data-ar="العنوان">Address</label>
+    <input type="text" id="customerAddress" required>
+
+    <button type="submit" data-en="Checkout via WhatsApp" data-ar="إتمام الطلب عبر واتساب">Checkout via WhatsApp</button>
+  </form>
+</section>
+
+<section id="contact" class="page">
+  <h1 data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h1>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p data-en="© 2025 Choklit Markus. All Rights Reserved." data-ar="© 2025 شوكليت ماركوس. جميع الحقوق محفوظة.">
+    © 2025 Choklit Markus. All Rights Reserved.
+  </p>
+</footer>
+
+<script>
+let currentLang = "en";
+const langBtn = document.getElementById("langBtn");
+
+langBtn.addEventListener("click", () => {
+  currentLang = currentLang === "en" ? "ar" : "en";
+  document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+  langBtn.textContent = currentLang === "ar" ? "EN" : "AR";
+
+  document.querySelectorAll("[data-en]").forEach(el => {
+    el.textContent = el.getAttribute(`data-${currentLang}`);
+  });
+
+  document.querySelectorAll("#shopGrid .card").forEach(card => {
+    const name = currentLang === "ar" ? card.dataset.nameAr : card.dataset.nameEn;
+    card.querySelector("h3").textContent = name;
+  });
+  filterProducts();
+});
+
+const filterSelect = document.getElementById("filterSelect");
+filterSelect.addEventListener("change", filterProducts);
+function filterProducts() {
+  const val = filterSelect.value;
+  document.querySelectorAll("#shopGrid .card").forEach(card => {
+    card.style.display = (val === "All" || card.dataset.type === val) ? "block" : "none";
+  });
+}
+
+let cartItems = [];
+const cartList = document.getElementById("cartItems");
+const totalEl = document.getElementById("total");
+const cartCountEl = document.getElementById("cartCount");
+const cartIcon = document.getElementById("cartIcon");
+
+function updateCart() {
+  cartList.innerHTML = "";
+  let total = 0;
+
+  cartItems.forEach((item, index) => {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    span.textContent = `${item.name} - ${item.price} MAD`;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "❌";
+    removeBtn.addEventListener("click", () => {
+      cartItems.splice(index, 1);
+      updateCart();
+    });
+
+    li.appendChild(span);
+    li.appendChild(removeBtn);
+    cartList.appendChild(li);
+
+    total += item.price;
+  });
+
+  totalEl.innerHTML = `<span>${currentLang === "ar" ? "المجموع" : "Total"}</span>: ${total} MAD`;
+  cartCountEl.textContent = cartItems.length;
+  document.getElementById("cartBadge").textContent = cartItems.length;
+}
+
+document.querySelectorAll(".add-cart").forEach(btn => {
+  btn.addEventListener("click", e => {
+    const card = e.target.closest(".card");
+    const name = currentLang === "ar" ? card.dataset.nameAr : card.dataset.nameEn;
+    const price = parseInt(card.dataset.price);
+    cartItems.push({ name, price });
+    updateCart();
+    cartIcon.classList.add("pulse");
+    setTimeout(() => cartIcon.classList.remove("pulse"), 600);
+    document.getElementById("cart").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+});
+
+document.getElementById("customerForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  if(cartItems.length === 0){
+    alert(currentLang === "ar" ? "السلة فارغة!" : "Cart is empty!");
+    return;
+  }
+  const name = document.getElementById("customerName").value;
+  const email = document.getElementById("customerEmail").value;
+  const phone = document.getElementById("customerPhone").value;
+  const city = document.getElementById("customerCity").value;
+  const address = document.getElementById("customerAddress").value;
+  const totalPrice = cartItems.reduce((sum,item)=>sum+item.price,0);
+
+  let message = currentLang === "ar"
+    ? `طلب جديد:%0Aالاسم: ${name}%0Aالبريد: ${email}%0Aرقم الهاتف: ${phone}%0Aالمدينة: ${city}%0Aالعنوان: ${address}%0A%0Aالمنتجات:%0A`
+    : `New Order:%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ACity: ${city}%0AAddress: ${address}%0A%0AProducts:%0A`;
+
+  cartItems.forEach(item => { message += `- ${item.name}: ${item.price} MAD%0A`; });
+  message += `%0A${currentLang==="ar"?"المجموع":"Total"}: ${totalPrice} MAD`;
+
+  window.open(`https://wa.me/212671100017?text=${message}`, "_blank");
+
+  cartItems = [];
+  updateCart();
+  document.getElementById("customerForm").reset();
+});
+</script>
+
+</body>
+</html>
